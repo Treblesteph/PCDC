@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 
 import CaseStudy from '../CaseStudy'
-import './CaseStudies.css';
+import Header from '../Header'
+import Footer from '../Footer'
+import './CaseStudies.scss';
 
 class CaseStudies extends Component {
-
-  componentDidMount () {
-    this.createStudies()
-  }
 
   createStudies = () => {
     const { content } = this.props
     if (content) {
-      content.map(study => {
+      const studies = content.map(study => {
         const title = study.title
         const profile = study.profileImage.fields.file.url
         const summary = study.summary
@@ -26,12 +24,21 @@ class CaseStudies extends Component {
           />
         )
       })
+      return studies
     }
   }
 
-  render() {    
+  render() {
+    const studies = this.createStudies()
+    console.log({studies})
     return(
-      <div>Hello here is CaseStudies</div>
+      <div>
+        <Header />
+        <div className='container'>
+          {studies}
+        </div>
+        <Footer />
+      </div>
     )
   }
 }
